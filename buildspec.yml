@@ -25,7 +25,6 @@ phases:
                         - cd docker/centos
                         - ls
                         - update-alternatives --set iptables /usr/sbin/iptables-legacy
-                        -  update-alternatives --set ip6tables /usr/sbin/ip6tables-legacy
                         - nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock 
                         - docker build -t trivy-testing:latest .
                         - echo "Done building1"
