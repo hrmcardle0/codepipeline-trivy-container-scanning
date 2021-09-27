@@ -7,6 +7,10 @@ phases:
         pre_build:
                 commands: 
                         - echo "Running pipeline!"
+                        - yum install wget -y
+                        - wget https://github.com/aquasecurity/trivy/releases/download/v0.19.2/trivy_0.19.2_Linux-64bit.rpm
+                        - rpm -ivh ./trivy_0.19.2_Linux-64bit.rpm
+                        - /usr/local/bin/trivy --version
         build:
                 commands:
                         - echo "Building"
