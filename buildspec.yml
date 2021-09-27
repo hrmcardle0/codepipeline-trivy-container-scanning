@@ -2,7 +2,7 @@ version: 0.2
 
 phases:
         install:
-                runtime-versoins:
+                runtime-versions:
                         docker: 19
         pre_build:
                 commands: 
@@ -18,8 +18,11 @@ phases:
                 commands:
                         - echo "Building"
                         - message=$(aws codecommit get-commit --repository-name Trivy-Demo --commit-id ${Commit_ID} | jq .commit.message)
-                        - export DOCKER_CONTAINER_ADDED=$(echo $message | grep "::.*" -o | sed 's/^..//' | sed 's/\\n//g' | sed 's/"//g')
-                        - echo $DOCKER_CONTAINER_ADDED
+                        - export DOCKER_IMAGE=$(echo $message | grep "::.*" -o | sed 's/^..//' | sed 's/\\n//g' | sed 's/"//g')
+                        - echo $DOCKER_IMAGE
+                        - cd docker/centos
+                        - ls
+                        - sudo docker build -t trivy-testing:latest .
                         - echo "Done building1"
         post_build:
                 commands:
