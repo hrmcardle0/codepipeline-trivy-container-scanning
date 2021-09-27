@@ -12,6 +12,7 @@ phases:
                         - rpm -ivh ./trivy_0.19.2_Linux-64bit.rpm
                         - /usr/local/bin/trivy --version
                         - echo ${Commit_ID}
+                        - echo "test"
         build:
                 commands:
                         - echo "Building"
