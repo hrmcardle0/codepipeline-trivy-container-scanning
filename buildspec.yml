@@ -17,12 +17,15 @@ phases:
                         - echo "test"
         build:
                 commands:
+                        - whoami
                         - echo "Building"
                         - message=$(aws codecommit get-commit --repository-name Trivy-Demo --commit-id ${Commit_ID} | jq .commit.message)
                         - export DOCKER_IMAGE=$(echo $message | grep "::.*" -o | sed 's/^..//' | sed 's/\\n//g' | sed 's/"//g')
                         - echo $DOCKER_IMAGE
                         - cd docker/centos
                         - ls
+                        - update-alternatives --set iptables /usr/sbin/iptables-legacy
+                        -  update-alternatives --set ip6tables /usr/sbin/ip6tables-legacy
                         - nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock 
                         - docker build -t trivy-testing:latest .
                         - echo "Done building1"
