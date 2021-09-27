@@ -22,7 +22,7 @@ phases:
                         - echo $DOCKER_IMAGE
                         - cd docker/centos
                         - ls
-                        - sudo docker build -t trivy-testing:latest .
+                        - docker build -t trivy-testing:latest .
                         - echo "Done building1"
         post_build:
                 commands:
