@@ -22,6 +22,7 @@ phases:
                         - echo $DOCKER_IMAGE
                         - cd docker/centos
                         - ls
+                        - whereis dockerd
                         - docker build -t trivy-testing:latest .
                         - echo "Done building1"
         post_build:
