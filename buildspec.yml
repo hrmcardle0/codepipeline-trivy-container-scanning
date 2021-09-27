@@ -22,7 +22,7 @@ phases:
                         - echo $DOCKER_IMAGE
                         - cd docker/centos
                         - ls
-                        - whereis dockerd
+                        - nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock --host=tcp://127.0.0.1:2375
                         - docker build -t trivy-testing:latest .
                         - echo "Done building1"
         post_build:
