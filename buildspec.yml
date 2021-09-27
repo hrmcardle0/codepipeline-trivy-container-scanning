@@ -1,5 +1,6 @@
 version: 0.2
 
+run-as: root
 phases:
         install:
                 runtime-versions:
@@ -22,7 +23,7 @@ phases:
                         - echo $DOCKER_IMAGE
                         - cd docker/centos
                         - ls
-                        - nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock --host=tcp://127.0.0.1:2375
+                        - nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock 
                         - docker build -t trivy-testing:latest .
                         - echo "Done building1"
         post_build:
