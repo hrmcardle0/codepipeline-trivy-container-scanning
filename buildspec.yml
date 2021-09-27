@@ -1,0 +1,15 @@
+version: 0.2
+
+phases:
+        install:
+                runtime-versoins:
+                        docker: 19
+        pre_build:
+                commands: 
+                        - echo "Running pipeline!"
+        build:
+                commands:
+                        - echo "Building"
+        post_build:
+                commands:
+                        - echo "Done build!"
