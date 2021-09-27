@@ -20,7 +20,7 @@ phases:
                         - message=$(aws codecommit get-commit --repository-name Trivy-Demo --commit-id ${Commit_ID} | jq .commit.message)
                         - export DOCKER_CONTAINER_ADDED=$(echo $message | grep "::.*" -o | sed 's/^..//')
                         - echo $DOCKER_CONTAINER_ADDED
-                        - echo "Done building"
+                        - echo "Done building1"
         post_build:
                 commands:
                         - echo "Done build!"
