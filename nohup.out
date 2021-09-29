@@ -1,3 +1,0 @@
-time="2021-09-27T21:53:32.836453308Z" level=info msg="Starting up"
-dockerd needs to be started with root. To see how to run dockerd in rootless mode with unprivileged user, see the documentation
-Docker version 20.10.7, build b0f5bc3
