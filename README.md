@@ -15,4 +15,4 @@ S3 Select is a service offered by AWS that allows the querying of data in the cl
 
 ## **Solution Overview**
 
-![Solution Diagram](https://raw.githubusercontent.com/hrmcardle0/codepipeline-trivy-container-scanning/master/trivy-diagram.png)
+![Solution Diagram](https://raw.githubusercontent.com/hrmcardle0/codepipeline-trivy-container-scanning/master/trivy-solution-diagram.png)
