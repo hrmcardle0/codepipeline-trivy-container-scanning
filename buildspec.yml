@@ -16,6 +16,7 @@ phases:
                         - rpm -ivh ./trivy_0.19.2_Linux-64bit.rpm
                         - /usr/local/bin/trivy --version
                         - echo ${Commit_ID}
+                        - sudo find /tmp -type f -atime +1 -delete
         build:
                 commands:
                         - echo "Building"
@@ -26,8 +27,17 @@ phases:
                         - update-alternatives --set iptables /usr/sbin/iptables-legacy
                         - echo "net.ipv4.ip_forward = 1" >> /etc/sysctl.conf
                         - docker build -t trivy-testing:latest .
-                        -  sudo /usr/local/bin/trivy -f json -o "trivy-results/${DOCKER_IMAGE}_results.json" --exit-code 0 --severity HIGH,MEDIUM,LOW --quiet --auto-refresh   
-                        - echo "Done building1"
+                        - echo "Runnig trivy scan against $DOCKER_IMAGE"
+                        - sudo /usr/local/bin/trivy -f json -o "trivy-results/${DOCKER_IMAGE}_results.json" --exit-code 0 --severity HIGH,MEDIUM,LOW --quiet --auto-refresh   
+                        - echo "Done scanning. Proceeding to post build-build s3 results upload and vulnerability identification..."
         post_build:
                 commands:
-                        - echo "Done build!"
+                        - echo "Uploading results to s3"
+                        - aws s3 cp trivy-results/${DOCKER_IMAGE}_results.json s3://${BUCKET_NAME}
+                        - echo "Parsing results..."
+                        - aws s3api select-object-content --bucket ${BUCKET_NAME} --key ${DOCKER_IMAGE}_results.json --expression "select * from s3object" --expression-type SQL --input-serialization '{"JSON": {"Type": "Document"}, "CompressionType": "None"}' --output-serialization '{"JSON": {"RecordDelimiter": "-"}}' "scan_result.json"
+                        - chmod +x ./count_vulns.sh
+                        - ./count_vulnes.sh
+                finally: 
+                        - unset DOCKER_IMAGE
+                        - unset BUCKET_NAME 

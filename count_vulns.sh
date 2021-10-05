@@ -2,7 +2,7 @@
 high=0;
 medium=0;
 low=0;
-sev=$(cat output.json | jq ._1[0].Vulnerabilities[].Severity | sed 's/"//g') 2> /dev/null
+sev=$(cat scan_result.json | jq ._1[0].Vulnerabilities[].Severity | sed 's/"//g') 2> /dev/null
 
 for a in $sev;
 do
