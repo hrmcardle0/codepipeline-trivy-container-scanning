@@ -1,4 +1,4 @@
-# Automatic Scanning of Container Images in a CI/CD Pipeline with Trivy'
+# Automatic Scanning of Container Images in a CI/CD Pipeline with Trivy
 
 Containerized applications provide the ability to package an application into a single component and quickly deploy it to many different types of systems. Usually the creation of images is developed as part of
 a Code-Pipeline, and this example provides a simple way to add the scanning of an Image into an AWS CodePipeline, although this example could be integrated into any software such as Jenkins. The project contains a buildspec.yml
