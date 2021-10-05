@@ -9,4 +9,6 @@ So what exactly is Trivy? Trivy is a simple, open source container image scannin
 
 S3 Select is a service offered by AWS that allows the querying of data in the cloud without having to first download it. It reads structured data such as JSON from files in S3 and allows you to use SQL-like syntax to query the datasets. It is very useful for when you want to mimic a database but don't need the hassle of standing up an entire new database.
 
+How does this all work? In your commit, you detail exactly what Docker image you would like to scanned. When you push a commit, preface the image name with ::. For example, a commit with the message "Fixed yum for image ::mysql:latest" would be correctly parsed, and the build would know to scan the mysql-latest container image. The buildspec file finds our Docker file under the directory that you specify. In the project, it finds the Dockerfile under docker/centos. If you make a MySQL image, you would create a new Dockerfile under the docker/mysql directory. This allows custom image building without having to import the image from an external repostiory, but an image could also be imported from ECR. 
+
 ## **Solution Overview**

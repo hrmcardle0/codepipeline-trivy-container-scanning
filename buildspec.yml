@@ -30,6 +30,7 @@ phases:
                         - echo "Runnig trivy scan against $DOCKER_IMAGE"
                         - sudo /usr/local/bin/trivy -f json -o "trivy-results/${DOCKER_IMAGE}_results.json" --exit-code 0 --severity HIGH,MEDIUM,LOW --quiet --auto-refresh   
                         - echo "Done scanning. Proceeding to post build-build s3 results upload and vulnerability identification..."
+                        - cd ../..
         post_build:
                 commands:
                         - echo "Uploading results to s3"
